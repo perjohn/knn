@@ -65,8 +65,7 @@ def calculate_knn_accuracy(k_nn, test_images, test_labels, train_images, train_l
     knn = KNN(train_images, train_labels)
     pred = knn.predict(test_images, k_nn)
     num_correct = np.sum(pred == test_labels)
-    accuracy = float(num_correct) / len(test_images)
-    return accuracy
+    return float(num_correct) / len(test_images)
 
 
 if __name__ == "__main__":

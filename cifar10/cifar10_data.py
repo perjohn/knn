@@ -65,13 +65,11 @@ def extract_data(save_dir):
 
 def extract_tar(batches_dir, save_dir, tar_filename):
     if not os.path.exists(batches_dir):
-        print('Extracting tar')
         extract_tar_file(save_dir, tar_filename)
 
 
 def download_tar(save_dir, tar_filename, url):
     if tar_filename not in os.listdir(save_dir):
-        print('Retrieving tar')
         urlretrieve(os.path.join(url, tar_filename), os.path.join(save_dir, tar_filename))
 
 
