@@ -7,30 +7,14 @@ import numpy as np
 
 
 def get_cifar10_train_images(num_images: int, save_dir: str = None) -> (np.ndarray, np.ndarray):
-    url = 'https://www.cs.toronto.edu/~kriz/'
-    tar_filename = 'cifar-10-python.tar.gz'
-    extract_dir_name = 'cifar-10-batches-py'
-
-    save_dir = get_or_create_save_dir(save_dir)
-    download_tar(save_dir, tar_filename, url)
-
-    batches_dir = os.path.join(save_dir, extract_dir_name)
-    extract_tar(batches_dir, save_dir, tar_filename)
+    batches_dir = extract_data(save_dir)
 
     images, labels = load_cifar10_train_images(batches_dir)
     return sub_sample(images, labels, num_images)
 
 
 def get_cifar10_test_images(num_images: int, save_dir: str = None) -> (np.ndarray, np.ndarray):
-    url = 'https://www.cs.toronto.edu/~kriz/'
-    tar_filename = 'cifar-10-python.tar.gz'
-    extract_dir_name = 'cifar-10-batches-py'
-
-    save_dir = get_or_create_save_dir(save_dir)
-    download_tar(save_dir, tar_filename, url)
-
-    batches_dir = os.path.join(save_dir, extract_dir_name)
-    extract_tar(batches_dir, save_dir, tar_filename)
+    batches_dir = extract_data(save_dir)
 
     images, labels = load_cifar10_test_images(batches_dir)
     return sub_sample(images, labels, num_images)
@@ -66,6 +50,17 @@ def load_cifar10_batch(batch_filename):
         images = images.reshape(10000, 3, 32, 32).transpose(0, 2, 3, 1).astype("float")
         labels = np.array(labels)
         return images, labels
+
+
+def extract_data(save_dir):
+    url = 'https://www.cs.toronto.edu/~kriz/'
+    tar_filename = 'cifar-10-python.tar.gz'
+    extract_dir_name = 'cifar-10-batches-py'
+    save_dir = get_or_create_save_dir(save_dir)
+    download_tar(save_dir, tar_filename, url)
+    batches_dir = os.path.join(save_dir, extract_dir_name)
+    extract_tar(batches_dir, save_dir, tar_filename)
+    return batches_dir
 
 
 def extract_tar(batches_dir, save_dir, tar_filename):
