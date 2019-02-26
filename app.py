@@ -2,7 +2,7 @@ import click
 import numpy as np
 
 from cifar10.cifar10_data import get_cifar10_train_images, get_cifar10_test_images
-from cross_validation.cross_validation import run_cross_validation
+from cross_validation.cross_validation import CrossValidation
 from k_nearest_neighbours.knn import KNN
 from mnist.mnist_data import get_mnist_test_images, get_mnist_train_images
 
@@ -38,8 +38,8 @@ def mnist_test(k_nn):
 def mnist_cross_validate():
     images, labels = get_mnist_train_images()
     k_nns = [1, 3, 5, 8, 10, 12, 15, 20, 50, 100]
-
-    run_cross_validation(images, labels, k_nns)
+    cross_validation = CrossValidation(images, labels, num_folds=5)
+    cross_validation(k_nns)
 
 
 @cli.command()
@@ -57,7 +57,8 @@ def cifar10_cross_validate():
     images, labels = get_cifar10_train_images(5000)
     k_nns = [1, 3, 5, 8, 10, 12, 15, 20, 50, 100]
 
-    run_cross_validation(images, labels, k_nns)
+    cross_validation = CrossValidation(images, labels, num_folds=5)
+    cross_validation(k_nns)
 
 
 def calculate_knn_accuracy(k_nn, test_images, test_labels, train_images, train_labels):
