@@ -1,6 +1,6 @@
 import numpy as np
 
-from knn import KNN
+from k_nearest_neighbours.knn import KNN
 
 
 def test_compute_distances():
