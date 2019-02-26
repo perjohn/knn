@@ -1,6 +1,6 @@
 import tempfile
 
-from cifar10_data import get_cifar10_train_images, get_cifar10_test_images
+from cifar10.cifar10_data import get_cifar10_train_images, get_cifar10_test_images
 
 
 def test_get_cifar10_train_images():

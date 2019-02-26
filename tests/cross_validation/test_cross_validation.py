@@ -1,6 +1,6 @@
 import numpy as np
 
-from cross_validation import cross_validation_set
+from cross_validation.cross_validation import cross_validation_set
 
 
 def test_cross_validation_set():
