@@ -1,9 +1,10 @@
 import os
 import pickle
-import tarfile
 from urllib.request import urlretrieve
 
 import numpy as np
+
+from utils.file_utils import extract_tar_file
 
 
 def get_cifar10_train_images(num_images: int, save_dir: str = None) -> (np.ndarray, np.ndarray):
@@ -78,12 +79,6 @@ def get_or_create_save_dir(save_dir):
         save_dir = os.path.join(os.path.expanduser('~'), 'data', 'CIFAR10')
     os.makedirs(save_dir, exist_ok=True)
     return save_dir
-
-
-def extract_tar_file(save_dir, tar_filename):
-    tar = tarfile.open(os.path.join(save_dir, tar_filename), 'r:gz')
-    tar.extractall(path=save_dir)
-    tar.close()
 
 
 def sub_sample(images, labels, num_images):
